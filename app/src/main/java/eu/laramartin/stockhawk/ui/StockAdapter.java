@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.ui;
+package eu.laramartin.stockhawk.ui;
 
 
 import android.content.Context;
@@ -9,16 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.udacity.stockhawk.R;
-import com.udacity.stockhawk.data.Contract;
-import com.udacity.stockhawk.data.PrefUtils;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.stockhawk.R;
+import eu.laramartin.stockhawk.data.Contract;
+import eu.laramartin.stockhawk.data.PrefUtils;
 
 class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 

@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.data;
+package eu.laramartin.stockhawk.data;
 
 
 import android.net.Uri;

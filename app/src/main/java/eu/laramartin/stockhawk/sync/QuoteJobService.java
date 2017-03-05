@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.sync;
+package eu.laramartin.stockhawk.sync;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;

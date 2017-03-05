@@ -1,4 +1,4 @@
-package com.udacity.stockhawk;
+package eu.laramartin.stockhawk;
 
 import android.app.Application;
 

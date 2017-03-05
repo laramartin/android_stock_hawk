@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.ui;
+package eu.laramartin.stockhawk.ui;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -19,13 +19,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.udacity.stockhawk.R;
-import com.udacity.stockhawk.data.Contract;
-import com.udacity.stockhawk.data.PrefUtils;
-import com.udacity.stockhawk.sync.QuoteSyncJob;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.laramartin.stockhawk.R;
+import eu.laramartin.stockhawk.data.Contract;
+import eu.laramartin.stockhawk.data.PrefUtils;
+import eu.laramartin.stockhawk.sync.QuoteSyncJob;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,

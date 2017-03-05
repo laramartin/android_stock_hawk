@@ -1,14 +1,14 @@
-package com.udacity.stockhawk.data;
+package eu.laramartin.stockhawk.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.udacity.stockhawk.R;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import eu.laramartin.stockhawk.R;
 
 public final class PrefUtils {
 

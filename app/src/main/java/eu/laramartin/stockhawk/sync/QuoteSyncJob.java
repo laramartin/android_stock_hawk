@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.sync;
+package eu.laramartin.stockhawk.sync;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -9,9 +9,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.udacity.stockhawk.data.Contract;
-import com.udacity.stockhawk.data.PrefUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import eu.laramartin.stockhawk.data.Contract;
+import eu.laramartin.stockhawk.data.PrefUtils;
 import timber.log.Timber;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
