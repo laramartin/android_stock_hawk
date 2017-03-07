@@ -60,6 +60,7 @@ public final class QuoteSyncJob {
                 return;
             }
 
+
             Map<String, Stock> quotes = YahooFinance.get(stockArray);
             Iterator<String> iterator = stockCopy.iterator();
 
@@ -72,6 +73,10 @@ public final class QuoteSyncJob {
 
 
                 Stock stock = quotes.get(symbol);
+                if (stock.getName() == null) {
+                    PrefUtils.removeStock(context, symbol);
+                    continue;
+                }
                 StockQuote quote = stock.getQuote();
 
                 float price = quote.getPrice().floatValue();
