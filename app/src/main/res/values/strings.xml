@@ -38,4 +38,12 @@
     <string name="percentage_prefix_positive" translatable="false">+</string>
     <string name="dollar_prefix_positive" translatable="false">+$</string>
 
+    <string name="display_mode_percentage">Display mode: Percentage.</string>
+    <string name="display_mode_dollar">Display mode: Absolute.</string>
+    <string name="stock">Stock: %s</string>
+    <string name="share_price">Share price: %s.</string>
+    <string name="share_price_change_absolute">Share price change: %s.</string>
+    <string name="share_price_change_percentage">Share price change: %s.</string>
+    <string name="button_add_stock">Add Stock</string>
+
 </resources>
