@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.List;
+
 import eu.laramartin.stockhawk.R;
 import eu.laramartin.stockhawk.data.Contract;
 
@@ -44,7 +47,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         data.moveToFirst();
         String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
-        Log.v(LOG_TAG, "historical data: " + history);
+        List<String> dailyClosingSharePrice = Arrays.asList(history.split("\n"));
+//        Log.v(LOG_TAG, "historical data: " + history);
+        for (String pair : dailyClosingSharePrice) {
+            Log.v(LOG_TAG, "dailyClosingSharePrice: " + pair);
+        }
     }
 
     @Override
