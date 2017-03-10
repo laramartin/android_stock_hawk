@@ -8,14 +8,14 @@
     <uses-permission android:name="android.Manifest.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name="eu.laramartin.stockhawk.StockHawkApp"
+        android:name=".StockHawkApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="eu.laramartin.stockhawk.ui.MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,19 +24,21 @@
         </activity>
 
         <service
-            android:name="eu.laramartin.stockhawk.sync.QuoteIntentService"
+            android:name=".sync.QuoteIntentService"
             android:exported="false" />
 
         <provider
-            android:name="eu.laramartin.stockhawk.data.StockProvider"
+            android:name=".data.StockProvider"
             android:authorities="eu.laramartin.stockhawk"
             android:exported="false" />
 
         <service
-            android:name="eu.laramartin.stockhawk.sync.QuoteJobService"
+            android:name=".sync.QuoteJobService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity android:name=".ui.DetailsActivity"></activity>
     </application>
 
 </manifest>

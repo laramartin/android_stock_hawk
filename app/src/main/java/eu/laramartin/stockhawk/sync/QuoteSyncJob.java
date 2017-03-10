@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public final class QuoteSyncJob {
                 Stock stock = quotes.get(symbol);
                 if (stock.getName() == null) {
                     PrefUtils.removeStock(context, symbol);
+                    Toast.makeText(context, "stock wasn't found", Toast.LENGTH_SHORT).show();
                     continue;
                 }
                 StockQuote quote = stock.getQuote();

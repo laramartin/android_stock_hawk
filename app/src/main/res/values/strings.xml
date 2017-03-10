@@ -45,5 +45,6 @@
     <string name="share_price_change_absolute">Share price change: %s.</string>
     <string name="share_price_change_percentage">Share price change: %s.</string>
     <string name="button_add_stock">Add Stock</string>
+    <string name="intent_stock_symbol_key">StockSymbol</string>
 
 </resources>
