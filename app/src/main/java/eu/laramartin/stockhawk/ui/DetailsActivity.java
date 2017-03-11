@@ -66,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 //        chartEntries.add(new Entry(3.0f, 3.0f));
 //        chartEntries.add(new Entry(4.0f, 4.0f));
         //long dateOfToday = System.currentTimeMillis();
-        int entry = 0;
+//        int entry = 0;
         for (String pair : weeklyClosingSharePrice) {
 //            Log.v(LOG_TAG, "weeklyClosingSharePrice: " + pair);
             List<String> dataPair = Arrays.asList(pair.split(", "));
@@ -74,9 +74,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 //            long dateOfQuote = Long.parseLong(dataPair.get(0));
 //            long dateRelativeInMillis = dateOfQuote - dateOfToday;
 //            float days = dateRelativeInMillis/(24*60*60*1000);
-            chartEntries.add(new Entry(entry,
+            chartEntries.add(new Entry(Float.parseFloat(dataPair.get(0)),
                     Float.parseFloat(dataPair.get(1))));
-            entry++;
+//            entry++;
         }
         LineDataSet dataSet = new LineDataSet(chartEntries, "Label");
         dataSet.setColor(R.color.colorAccent);
