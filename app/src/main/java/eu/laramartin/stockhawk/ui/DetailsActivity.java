@@ -13,6 +13,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.common.collect.Lists;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         data.moveToFirst();
         String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
-        List<String> weeklyClosingSharePrice = Arrays.asList(history.split("\n"));
+        List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(history.split("\n")));
 //        Log.v(LOG_TAG, "historical data: " + history);
         List<Entry> chartEntries = new ArrayList<Entry>();
 //        chartEntries.add(new Entry(1.0f, 1.0f));
