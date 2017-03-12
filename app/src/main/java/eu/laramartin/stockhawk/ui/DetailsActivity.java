@@ -106,29 +106,38 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     private void displayStockStats(Cursor data) {
         data.moveToFirst();
-        textStockName.setText(data.getString(Contract.Quote.POSITION_SYMBOL));
-        textStockPrice.setText(data.getString(Contract.Quote.POSITION_PRICE));
+        textStockName.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
+        textStockPrice.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
         String change;
         if (PrefUtils.getDisplayMode(this)
                 .equals(this.getString(R.string.pref_display_mode_absolute_key))) {
 
             change = TextUtils.setDollarFormatWithPlus(this).format(
-                    data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE));
+                    data.getFloat(
+                            data.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
             textStockChange.setText(change);
             textStockChange.setContentDescription(getString(R.string.share_price_change_absolute,
                             change));
         } else {
-            change = TextUtils.setPercentageFormat(this).format(
-                    data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE) / 100);
+            float percentage = data.getFloat(
+                    data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
+            change = TextUtils.setPercentageFormat(this).format(percentage / 100);
             textStockChange.setText(change);
             textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
                             change));
         }
-        textStockVolume.setText(data.getString(Contract.Quote.POSITION_VOLUME));
-        textStockLow.setText(data.getString(Contract.Quote.POSITION_DAY_LOW));
-        textStockHigh.setText(data.getString(Contract.Quote.POSITION_DAY_HIGH));
-        textStockOpen.setText(data.getString(Contract.Quote.POSITION_DAY_OPEN));
-//        textStockPrevClose.setText(data.getString(Contract.Quote.POSITION_PREV_CLOSE));
+        textStockVolume.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
+        textStockLow.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
+        textStockHigh.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
+        textStockOpen.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
+        textStockPrevClose.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
     }
 
     private void setXAxisFormat() {

@@ -35,7 +35,8 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
     String getSymbolAtPosition(int position) {
 
         cursor.moveToPosition(position);
-        return cursor.getString(Contract.Quote.POSITION_SYMBOL);
+        return cursor.getString(
+                cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL));
     }
 
     @Override
@@ -52,17 +53,20 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
         cursor.moveToPosition(position);
 
 
-        holder.symbol.setText(cursor.getString(Contract.Quote.POSITION_SYMBOL));
+        holder.symbol.setText(cursor.getString(
+                cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
         holder.symbol.setContentDescription(context.getString(R.string.stock,
-                        cursor.getString(Contract.Quote.POSITION_SYMBOL)));
+                        cursor.getString(cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL))));
         holder.price.setText(TextUtils.setDollarFormat().format(
-                cursor.getFloat(Contract.Quote.POSITION_PRICE)));
+                cursor.getFloat(cursor.getColumnIndex(Contract.Quote.COLUMN_PRICE))));
         holder.price.setContentDescription(context.getString(R.string.share_price,
-                TextUtils.setDollarFormat().format(cursor.getFloat(Contract.Quote.POSITION_PRICE))));
+                TextUtils.setDollarFormat().format(cursor.getFloat(
+                        cursor.getColumnIndex(Contract.Quote.COLUMN_PRICE)))));
 
-
-        float rawAbsoluteChange = cursor.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE);
-        float percentageChange = cursor.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE);
+        float rawAbsoluteChange = cursor.getFloat(
+                cursor.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE));
+        float percentageChange = cursor.getFloat(
+                cursor.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
 
         if (rawAbsoluteChange > 0) {
             holder.change.setBackgroundResource(R.drawable.percent_change_pill_green);
