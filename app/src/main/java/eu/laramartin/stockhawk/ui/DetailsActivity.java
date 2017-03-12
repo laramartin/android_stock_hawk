@@ -7,6 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -30,6 +31,8 @@ import eu.laramartin.stockhawk.R;
 import eu.laramartin.stockhawk.data.Contract;
 import eu.laramartin.stockhawk.data.PrefUtils;
 import eu.laramartin.stockhawk.data.TextUtils;
+
+import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
 
 public class DetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -64,7 +67,13 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                         Contract.Quote.COLUMN_SYMBOL,
                         Contract.Quote.COLUMN_PRICE,
                         Contract.Quote.COLUMN_ABSOLUTE_CHANGE,
-                        Contract.Quote.COLUMN_PERCENTAGE_CHANGE},
+                        Contract.Quote.COLUMN_PERCENTAGE_CHANGE,
+                        Contract.Quote.COLUMN_VOLUME,
+                        Contract.Quote.COLUMN_DAY_LOW,
+                        Contract.Quote.COLUMN_DAY_HIGH,
+                        Contract.Quote.COLUMN_DAY_OPEN,
+                        Contract.Quote.COLUMN_PREV_CLOSE
+                },
                 null, null, null);
     }
 
@@ -113,6 +122,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
                             change));
         }
+        Log.v(LOG_TAG, "volume: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
+        Log.v(LOG_TAG, "day low: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
+        Log.v(LOG_TAG, "day high: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
+        Log.v(LOG_TAG, "day open: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
+        Log.v(LOG_TAG, "previous close: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
     }
 
     private void setXAxisFormat() {

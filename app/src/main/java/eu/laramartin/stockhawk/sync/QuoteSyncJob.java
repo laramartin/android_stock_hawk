@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -84,6 +85,11 @@ public final class QuoteSyncJob {
                 float price = quote.getPrice().floatValue();
                 float change = quote.getChange().floatValue();
                 float percentChange = quote.getChangeInPercent().floatValue();
+                float volume = quote.getVolume();
+                BigDecimal dayLow = quote.getDayLow();
+                BigDecimal dayHigh = quote.getDayHigh();
+                BigDecimal dayOpen = quote.getOpen();
+                BigDecimal previousClose = quote.getPreviousClose();
 
                 // WARNING! Don't request historical data for a stock that doesn't exist!
                 // The request will hang forever X_x
@@ -104,9 +110,12 @@ public final class QuoteSyncJob {
                 quoteCV.put(Contract.Quote.COLUMN_PERCENTAGE_CHANGE, percentChange);
                 quoteCV.put(Contract.Quote.COLUMN_ABSOLUTE_CHANGE, change);
                 quoteCV.put(Contract.Quote.COLUMN_HISTORY, historyBuilder.toString());
-
+                quoteCV.put(Contract.Quote.COLUMN_VOLUME, volume);
+                quoteCV.put(Contract.Quote.COLUMN_DAY_LOW, String.valueOf(dayLow));
+                quoteCV.put(Contract.Quote.COLUMN_DAY_HIGH, String.valueOf(dayHigh));
+                quoteCV.put(Contract.Quote.COLUMN_DAY_OPEN, String.valueOf(dayOpen));
+                quoteCV.put(Contract.Quote.COLUMN_PREV_CLOSE, String.valueOf(previousClose));
                 quoteCVs.add(quoteCV);
-
             }
 
             context.getContentResolver()
