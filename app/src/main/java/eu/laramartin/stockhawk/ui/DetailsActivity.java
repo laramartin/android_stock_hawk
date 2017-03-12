@@ -7,7 +7,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -44,7 +43,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             symbol = intent.getExtras().getString(getString(R.string.intent_stock_symbol_key));
-            Toast.makeText(this, "symbol: " + symbol, Toast.LENGTH_SHORT).show();
         }
         getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
     }
@@ -61,33 +59,19 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         data.moveToFirst();
         String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
-        List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(history.split("\n")));
-//        Log.v(LOG_TAG, "historical data: " + history);
-        List<Entry> chartEntries = new ArrayList<Entry>();
-//        chartEntries.add(new Entry(1.0f, 1.0f));
-//        chartEntries.add(new Entry(2.0f, 2.0f));
-//        chartEntries.add(new Entry(3.0f, 3.0f));
-//        chartEntries.add(new Entry(4.0f, 4.0f));
-        //long dateOfToday = System.currentTimeMillis();
-//        int entry = 0;
+        List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(
+                history.split(getString(R.string.symbol_line_break))));
+        List<Entry> chartEntries = new ArrayList<>();
         for (String pair : weeklyClosingSharePrice) {
-//            Log.v(LOG_TAG, "weeklyClosingSharePrice: " + pair);
-            List<String> dataPair = Arrays.asList(pair.split(", "));
-//            Log.v(LOG_TAG, "dataPair: " + dataPair);
-//            long dateOfQuote = Long.parseLong(dataPair.get(0));
-//            long dateRelativeInMillis = dateOfQuote - dateOfToday;
-//            float days = dateRelativeInMillis/(24*60*60*1000);
+            List<String> dataPair = Arrays.asList(pair.split(getString(R.string.symbol_separator_pairs_data_history_data)));
             chartEntries.add(new Entry(Float.parseFloat(dataPair.get(0)),
                     Float.parseFloat(dataPair.get(1))));
-//            entry++;
         }
-        LineDataSet dataSet = new LineDataSet(chartEntries, "Label");
+        LineDataSet dataSet = new LineDataSet(chartEntries, getString(R.string.chart_label));
         dataSet.setColor(R.color.colorAccent);
         LineData lineData = new LineData(dataSet);
         setXAxisFormat();
-
         chart.setData(lineData);
-
         chart.invalidate();
     }
 
@@ -104,12 +88,13 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     private String convertTimeInMillisToDate(float dateInMillis) {
         Date date = new Date((long)(dateInMillis));
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.date_american_format));
         return formatter.format(date);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        //TODO
 
     }
 }

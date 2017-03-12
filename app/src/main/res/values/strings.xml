@@ -46,5 +46,9 @@
     <string name="share_price_change_percentage">Share price change: %s.</string>
     <string name="button_add_stock">Add Stock</string>
     <string name="intent_stock_symbol_key">StockSymbol</string>
+    <string name="symbol_line_break">\n</string>
+    <string name="symbol_separator_pairs_data_history_data">, </string>
+    <string name="chart_label">Label</string>
+    <string name="date_american_format">MM/dd/yyyy</string>
 
 </resources>
