@@ -128,8 +128,14 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
                             change));
         }
-        textStockVolume.setText(data.getString(
-                data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
+        try {
+            float volume = Float.parseFloat(data.getString(
+                    data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
+            volume /= 1000000;
+            textStockVolume.setText(String.format("%.2fM", volume));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
         textStockLow.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
         textStockHigh.setText(data.getString(
