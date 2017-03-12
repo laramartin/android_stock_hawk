@@ -52,5 +52,10 @@
     <string name="date_american_format">MM/dd/yyyy</string>
     <string name="share_price_title">Share price:</string>
     <string name="change_share_price">Change:</string>
+    <string name="stock_prev_close">Prev. close</string>
+    <string name="stock_day_low">Low</string>
+    <string name="stock_day_high">High</string>
+    <string name="stock_day_open">Close</string>
+    <string name="stock_volume">Volume</string>
 
 </resources>

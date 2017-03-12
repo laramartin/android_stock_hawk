@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
+
+import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
 
 public final class QuoteSyncJob {
 
@@ -90,6 +93,16 @@ public final class QuoteSyncJob {
                 BigDecimal dayHigh = quote.getDayHigh();
                 BigDecimal dayOpen = quote.getOpen();
                 BigDecimal previousClose = quote.getPreviousClose();
+
+                Log.v(LOG_TAG, "price: " + price);
+                Log.v(LOG_TAG, "change: " + change);
+                Log.v(LOG_TAG, "percentChange: " + percentChange);
+                Log.v(LOG_TAG, "volume: " + volume);
+                Log.v(LOG_TAG, "dayLow: " + dayLow);
+                Log.v(LOG_TAG, "dayHigh: " + dayHigh);
+                Log.v(LOG_TAG, "dayOpen: " + dayOpen);
+                Log.v(LOG_TAG, "previousClose: " + previousClose);
+
 
                 // WARNING! Don't request historical data for a stock that doesn't exist!
                 // The request will hang forever X_x

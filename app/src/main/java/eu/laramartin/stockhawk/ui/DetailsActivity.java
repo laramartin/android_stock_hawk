@@ -7,7 +7,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -32,8 +31,6 @@ import eu.laramartin.stockhawk.data.Contract;
 import eu.laramartin.stockhawk.data.PrefUtils;
 import eu.laramartin.stockhawk.data.TextUtils;
 
-import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
-
 public class DetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int STOCK_LOADER = 0;
@@ -46,6 +43,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     TextView textStockPrice;
     @BindView(R.id.text_details_change)
     TextView textStockChange;
+    @BindView(R.id.text_details_volume) TextView textStockVolume;
+    @BindView(R.id.text_details_low) TextView textStockLow;
+    @BindView(R.id.text_details_high) TextView textStockHigh;
+    @BindView(R.id.text_details_open) TextView textStockOpen;
+    @BindView(R.id.text_details_prev_close) TextView textStockPrevClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this,
                 Contract.Quote.makeUriForStock(symbol),
-                new String[]{Contract.Quote.COLUMN_HISTORY,
-                        Contract.Quote.COLUMN_SYMBOL,
+                new String[]{Contract.Quote.COLUMN_SYMBOL,
                         Contract.Quote.COLUMN_PRICE,
                         Contract.Quote.COLUMN_ABSOLUTE_CHANGE,
                         Contract.Quote.COLUMN_PERCENTAGE_CHANGE,
+                        Contract.Quote.COLUMN_HISTORY,
                         Contract.Quote.COLUMN_VOLUME,
                         Contract.Quote.COLUMN_DAY_LOW,
                         Contract.Quote.COLUMN_DAY_HIGH,
@@ -104,8 +106,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     private void displayStockStats(Cursor data) {
         data.moveToFirst();
-        textStockName.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
-        textStockPrice.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
+        textStockName.setText(data.getString(Contract.Quote.POSITION_SYMBOL));
+        textStockPrice.setText(data.getString(Contract.Quote.POSITION_PRICE));
         String change;
         if (PrefUtils.getDisplayMode(this)
                 .equals(this.getString(R.string.pref_display_mode_absolute_key))) {
@@ -122,11 +124,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
                             change));
         }
-        Log.v(LOG_TAG, "volume: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
-        Log.v(LOG_TAG, "day low: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
-        Log.v(LOG_TAG, "day high: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
-        Log.v(LOG_TAG, "day open: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
-        Log.v(LOG_TAG, "previous close: " + data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
+        textStockVolume.setText(data.getString(Contract.Quote.POSITION_VOLUME));
+        textStockLow.setText(data.getString(Contract.Quote.POSITION_DAY_LOW));
+        textStockHigh.setText(data.getString(Contract.Quote.POSITION_DAY_HIGH));
+        textStockOpen.setText(data.getString(Contract.Quote.POSITION_DAY_OPEN));
+//        textStockPrevClose.setText(data.getString(Contract.Quote.POSITION_PREV_CLOSE));
     }
 
     private void setXAxisFormat() {
