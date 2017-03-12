@@ -10,9 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.google.common.collect.Lists;
 
 import java.text.SimpleDateFormat;
@@ -81,12 +84,26 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         LineDataSet dataSet = new LineDataSet(chartEntries, "Label");
         dataSet.setColor(R.color.colorAccent);
         LineData lineData = new LineData(dataSet);
+        setXAxisFormat();
+
         chart.setData(lineData);
+
         chart.invalidate();
     }
 
-    private String convertTimeInMillisToDate(String dateInMillis) {
-        Date date = new Date(Long.parseLong(dateInMillis) * 1000);
+    private void setXAxisFormat() {
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return convertTimeInMillisToDate(value);
+            }
+        });
+        xAxis.setLabelRotationAngle(-45);
+    }
+
+    private String convertTimeInMillisToDate(float dateInMillis) {
+        Date date = new Date((long)(dateInMillis));
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         return formatter.format(date);
     }

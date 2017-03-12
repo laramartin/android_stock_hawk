@@ -10,11 +10,12 @@
         android:id="@+id/text_details_stock_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="GOOG"/>
+        tools:text="GOOG" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        android:layout_marginTop="32dp" />
 
 </LinearLayout>
