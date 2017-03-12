@@ -28,6 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.laramartin.stockhawk.R;
 import eu.laramartin.stockhawk.data.Contract;
+import eu.laramartin.stockhawk.data.PrefUtils;
+import eu.laramartin.stockhawk.data.TextUtils;
 
 public class DetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -71,7 +73,22 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         data.moveToFirst();
         textStockName.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
         textStockPrice.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
-        textStockChange.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE)));
+        String change;
+        if (PrefUtils.getDisplayMode(this)
+                .equals(this.getString(R.string.pref_display_mode_absolute_key))) {
+
+            change = TextUtils.setDollarFormatWithPlus(this).format(
+                    data.getFloat(Contract.Quote.POSITION_ABSOLUTE_CHANGE));
+            textStockChange.setText(change);
+            textStockChange.setContentDescription(getString(R.string.share_price_change_absolute,
+                            change));
+        } else {
+            change = TextUtils.setPercentageFormat(this).format(
+                    data.getFloat(Contract.Quote.POSITION_PERCENTAGE_CHANGE) / 100);
+            textStockChange.setText(change);
+            textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
+                            change));
+        }
         String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
         List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(
                 history.split(getString(R.string.symbol_line_break))));
