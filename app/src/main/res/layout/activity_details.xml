@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical"
     tools:context="eu.laramartin.stockhawk.ui.DetailsActivity">
 
@@ -11,6 +12,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="GOOG" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/share_price_title" />
+
+        <TextView
+            android:id="@+id/text_details_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1000.00" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/change_share_price" />
+
+        <TextView
+            android:id="@+id/text_details_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="100%" />
+    </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"

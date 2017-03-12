@@ -7,6 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -34,6 +35,12 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private String symbol;
     @BindView(R.id.chart)
     LineChart chart;
+    @BindView(R.id.text_details_stock_name)
+    TextView textStockName;
+    @BindView(R.id.text_details_price)
+    TextView textStockPrice;
+    @BindView(R.id.text_details_change)
+    TextView textStockChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +58,20 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this,
                 Contract.Quote.makeUriForStock(symbol),
-                new String[]{Contract.Quote.COLUMN_HISTORY},
+                new String[]{Contract.Quote.COLUMN_HISTORY,
+                        Contract.Quote.COLUMN_SYMBOL,
+                        Contract.Quote.COLUMN_PRICE,
+                        Contract.Quote.COLUMN_ABSOLUTE_CHANGE,
+                        Contract.Quote.COLUMN_PERCENTAGE_CHANGE},
                 null, null, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         data.moveToFirst();
+        textStockName.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
+        textStockPrice.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
+        textStockChange.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE)));
         String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
         List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(
                 history.split(getString(R.string.symbol_line_break))));
@@ -87,7 +101,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     }
 
     private String convertTimeInMillisToDate(float dateInMillis) {
-        Date date = new Date((long)(dateInMillis));
+        Date date = new Date((long) (dateInMillis));
         SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.date_american_format));
         return formatter.format(date);
     }

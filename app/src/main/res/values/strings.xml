@@ -50,5 +50,7 @@
     <string name="symbol_separator_pairs_data_history_data">, </string>
     <string name="chart_label">Label</string>
     <string name="date_american_format">MM/dd/yyyy</string>
+    <string name="share_price_title">Share price:</string>
+    <string name="change_share_price">Change:</string>
 
 </resources>
