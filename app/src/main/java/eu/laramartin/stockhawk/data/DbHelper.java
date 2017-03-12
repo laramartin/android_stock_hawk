@@ -27,6 +27,11 @@ class DbHelper extends SQLiteOpenHelper {
                 + Contract.Quote.COLUMN_ABSOLUTE_CHANGE + " REAL NOT NULL, "
                 + Contract.Quote.COLUMN_PERCENTAGE_CHANGE + " REAL NOT NULL, "
                 + Contract.Quote.COLUMN_HISTORY + " TEXT NOT NULL, "
+                + Contract.Quote.COLUMN_VOLUME + " REAL, "
+                + Contract.Quote.COLUMN_DAY_LOW + " REAL, "
+                + Contract.Quote.COLUMN_DAY_HIGH + " REAL, "
+                + Contract.Quote.COLUMN_DAY_OPEN + " REAL, "
+                + Contract.Quote.COLUMN_PREV_CLOSE + " REAL, "
                 + "UNIQUE (" + Contract.Quote.COLUMN_SYMBOL + ") ON CONFLICT REPLACE);";
 
         db.execSQL(builder);
