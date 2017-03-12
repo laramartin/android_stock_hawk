@@ -70,6 +70,30 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        displayStockStats(data);
+        displayHistoryStockChart(data);
+    }
+
+    private void displayHistoryStockChart(Cursor data) {
+        data.moveToFirst();
+        String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
+        List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(
+                history.split(getString(R.string.symbol_line_break))));
+        List<Entry> chartEntries = new ArrayList<>();
+        for (String pair : weeklyClosingSharePrice) {
+            List<String> dataPair = Arrays.asList(pair.split(getString(R.string.symbol_separator_pairs_data_history_data)));
+            chartEntries.add(new Entry(Float.parseFloat(dataPair.get(0)),
+                    Float.parseFloat(dataPair.get(1))));
+        }
+        LineDataSet dataSet = new LineDataSet(chartEntries, getString(R.string.chart_label));
+        dataSet.setColor(R.color.colorAccent);
+        LineData lineData = new LineData(dataSet);
+        setXAxisFormat();
+        chart.setData(lineData);
+        chart.invalidate();
+    }
+
+    private void displayStockStats(Cursor data) {
         data.moveToFirst();
         textStockName.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
         textStockPrice.setText(data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
@@ -89,21 +113,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
                             change));
         }
-        String history = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_HISTORY));
-        List<String> weeklyClosingSharePrice = Lists.reverse(Arrays.asList(
-                history.split(getString(R.string.symbol_line_break))));
-        List<Entry> chartEntries = new ArrayList<>();
-        for (String pair : weeklyClosingSharePrice) {
-            List<String> dataPair = Arrays.asList(pair.split(getString(R.string.symbol_separator_pairs_data_history_data)));
-            chartEntries.add(new Entry(Float.parseFloat(dataPair.get(0)),
-                    Float.parseFloat(dataPair.get(1))));
-        }
-        LineDataSet dataSet = new LineDataSet(chartEntries, getString(R.string.chart_label));
-        dataSet.setColor(R.color.colorAccent);
-        LineData lineData = new LineData(dataSet);
-        setXAxisFormat();
-        chart.setData(lineData);
-        chart.invalidate();
     }
 
     private void setXAxisFormat() {
