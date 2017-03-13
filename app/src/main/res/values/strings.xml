@@ -57,5 +57,6 @@
     <string name="stock_day_high">High</string>
     <string name="stock_day_open">Close</string>
     <string name="stock_volume">Volume</string>
+    <string name="title_widget">Stock Hawk</string>
 
 </resources>

@@ -42,6 +42,17 @@
             android:name=".ui.DetailsActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.MainActivity" />
+
+        <receiver
+            android:name=".widget.WidgetProvider"
+            android:label="@string/title_widget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_detail" />
+        </receiver>
     </application>
 
 </manifest>
