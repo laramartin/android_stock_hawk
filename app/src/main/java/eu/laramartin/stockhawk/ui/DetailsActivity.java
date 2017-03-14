@@ -97,6 +97,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                     Float.parseFloat(dataPair.get(1))));
         }
         LineDataSet dataSet = new LineDataSet(chartEntries, getString(R.string.chart_label));
+        // TODO check why setColor doesn't work
         dataSet.setColor(R.color.colorAccent);
         LineData lineData = new LineData(dataSet);
         setXAxisFormat();

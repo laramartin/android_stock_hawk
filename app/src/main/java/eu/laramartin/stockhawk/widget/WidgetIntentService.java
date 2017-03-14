@@ -15,6 +15,7 @@ import java.util.Set;
 import eu.laramartin.stockhawk.R;
 import eu.laramartin.stockhawk.data.Contract;
 import eu.laramartin.stockhawk.data.PrefUtils;
+import eu.laramartin.stockhawk.data.TextUtils;
 import eu.laramartin.stockhawk.ui.MainActivity;
 
 /**
@@ -52,14 +53,17 @@ public class WidgetIntentService extends IntentService {
             data.close();
             return;
         }
-        String price = data.getString(data.getColumnIndex(
-                Contract.Quote.COLUMN_PRICE));
+        String price = TextUtils.setDollarFormat().format(data.getFloat(data.getColumnIndex(
+                Contract.Quote.COLUMN_PRICE)));
         String change;
         if (PrefUtils.getDisplayMode(this).equals(
                 this.getResources().getString(R.string.pref_display_mode_absolute_key))) {
-            change = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE));
+            change = TextUtils.setDollarFormatWithPlus(this).format(
+                    data.getFloat(data.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
         } else {
-            change = data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
+            float percentage = data.getFloat(
+                    data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
+            change = TextUtils.setPercentageFormat(this).format(percentage / 100);
         }
 
         for (int appWidgetId : appWidgetIds) {
@@ -70,8 +74,8 @@ public class WidgetIntentService extends IntentService {
 //            views.setImageViewResource(R.id.widget_icon, weatherArtResourceId);
 
             views.setTextViewText(R.id.text_widget_stock_name, symbol);
-            views.setTextViewText(R.id.text_widget_share_price, price);
-            views.setTextViewText(R.id.text_widget_price_change, change);
+            views.setTextViewText(R.id.text_widget_share_price, String.valueOf(price));
+            views.setTextViewText(R.id.text_widget_price_change, String.valueOf(change));
 
             Intent launchIntent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0);
