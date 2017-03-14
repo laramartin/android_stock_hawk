@@ -16,7 +16,7 @@ import eu.laramartin.stockhawk.data.Contract;
 import eu.laramartin.stockhawk.data.PrefUtils;
 import eu.laramartin.stockhawk.data.TextUtils;
 
-class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
+public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
     private final Context context;
     private Cursor cursor;
@@ -132,4 +132,5 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             clickHandler.onClick(cursor.getString(symbolColumn));
         }
     }
+
 }
