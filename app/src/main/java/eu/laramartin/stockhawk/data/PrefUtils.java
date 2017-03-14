@@ -84,8 +84,6 @@ public final class PrefUtils {
         } else {
             editor.putString(key, absoluteKey);
         }
-
         editor.apply();
     }
-
 }

@@ -21,6 +21,4 @@ public class QuoteJobService extends JobService {
     public boolean onStopJob(JobParameters jobParameters) {
         return false;
     }
-
-
 }

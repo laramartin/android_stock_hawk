@@ -34,6 +34,4 @@ public final class TextUtils {
         percentageFormat.setPositivePrefix(context.getString(R.string.percentage_prefix_positive));
         return percentageFormat;
     }
-
-
 }

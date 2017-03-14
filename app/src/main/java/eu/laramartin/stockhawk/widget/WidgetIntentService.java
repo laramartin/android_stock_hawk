@@ -65,14 +65,10 @@ public class WidgetIntentService extends IntentService {
                     data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
             change = TextUtils.setPercentageFormat(this).format(percentage / 100);
         }
-
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(
                     getPackageName(),
                     R.layout.widget_list_item);
-
-//            views.setImageViewResource(R.id.widget_icon, weatherArtResourceId);
-
             views.setTextViewText(R.id.text_widget_stock_name, symbol);
             views.setTextViewText(R.id.text_widget_share_price, String.valueOf(price));
             views.setTextViewText(R.id.text_widget_price_change, String.valueOf(change));

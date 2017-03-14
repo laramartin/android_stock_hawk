@@ -64,8 +64,6 @@ public final class QuoteSyncJob {
             if (stockArray.length == 0) {
                 return;
             }
-
-
             Map<String, Stock> quotes = YahooFinance.get(stockArray);
             Iterator<String> iterator = stockCopy.iterator();
 
@@ -102,7 +100,6 @@ public final class QuoteSyncJob {
                 Log.v(LOG_TAG, "dayHigh: " + dayHigh);
                 Log.v(LOG_TAG, "dayOpen: " + dayOpen);
                 Log.v(LOG_TAG, "previousClose: " + previousClose);
-
 
                 // WARNING! Don't request historical data for a stock that doesn't exist!
                 // The request will hang forever X_x
@@ -163,10 +160,8 @@ public final class QuoteSyncJob {
 
 
     public static synchronized void initialize(final Context context) {
-
         schedulePeriodic(context);
         syncImmediately(context);
-
     }
 
     public static synchronized void syncImmediately(Context context) {
@@ -189,8 +184,6 @@ public final class QuoteSyncJob {
             JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
             scheduler.schedule(builder.build());
-
-
         }
     }
 }

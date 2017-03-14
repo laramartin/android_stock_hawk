@@ -52,7 +52,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
         cursor.moveToPosition(position);
 
-
         holder.symbol.setText(cursor.getString(
                 cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
         holder.symbol.setContentDescription(context.getString(R.string.stock,
@@ -89,8 +88,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                     context.getString(R.string.share_price_change_percentage,
                     percentage));
         }
-
-
     }
 
     @Override
@@ -132,5 +129,4 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
             clickHandler.onClick(cursor.getString(symbolColumn));
         }
     }
-
 }

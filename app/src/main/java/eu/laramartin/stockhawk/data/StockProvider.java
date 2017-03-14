@@ -146,7 +146,6 @@ public class StockProvider extends ContentProvider {
                 context.getContentResolver().notifyChange(uri, null);
             }
         }
-
         return rowsDeleted;
     }
 
@@ -186,7 +185,5 @@ public class StockProvider extends ContentProvider {
             default:
                 return super.bulkInsert(uri, values);
         }
-
-
     }
 }
