@@ -20,4 +20,9 @@
         <item name="android:textSize">25sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="widgetLargeText" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
+    </style>
 </resources>
