@@ -58,5 +58,7 @@
     <string name="stock_day_open">Close</string>
     <string name="stock_volume">Volume</string>
     <string name="title_widget">Stock Hawk</string>
+    <string name="empty_stock_list">Add stocks to the list in the app!</string>
+    <string name="title_widget_detail">Stock Details</string>
 
 </resources>
