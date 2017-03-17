@@ -68,7 +68,7 @@ public class WidgetIntentService extends IntentService {
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(
                     getPackageName(),
-                    R.layout.widget_list_item);
+                    R.layout.widget_stock_item);
             views.setTextViewText(R.id.text_widget_stock_name, symbol);
             views.setTextViewText(R.id.text_widget_share_price, String.valueOf(price));
             views.setTextViewText(R.id.text_widget_price_change, String.valueOf(change));

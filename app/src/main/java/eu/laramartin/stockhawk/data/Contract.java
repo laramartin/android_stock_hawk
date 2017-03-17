@@ -20,6 +20,7 @@ public final class Contract {
     public static final class Quote implements BaseColumns {
 
         public static final Uri URI = BASE_URI.buildUpon().appendPath(PATH_QUOTE).build();
+        public static final String COLUMN_ID = "_ID";
         public static final String COLUMN_SYMBOL = "symbol";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_ABSOLUTE_CHANGE = "absolute_change";
