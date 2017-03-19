@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     android:padding="@dimen/widget_margin">
 
+    <TextView
+        android:id="@+id/widget_single_stock_empty"
+        style="@style/widgetLargeText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlackTransparency"
+        android:contentDescription="@string/empty_stock_list"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="@string/empty_stock_list"
+        android:textAppearance="?android:textAppearanceLarge" />
+
     <LinearLayout
         android:id="@+id/widget"
         android:layout_width="match_parent"

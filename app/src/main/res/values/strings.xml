@@ -66,5 +66,6 @@
     <string name="content_description_day_open">Day open: %s.</string>
     <string name="content_description_day_close">Day close: %s.</string>
     <string name="content_description_chart">Chart displaying weekly closing prices in the last two years of %s.</string>
+    <string name="content_description_widget_item" formatted="false">The stock selected is %1s. The stock price is %2s and the price change is %3s.</string>
 
 </resources>

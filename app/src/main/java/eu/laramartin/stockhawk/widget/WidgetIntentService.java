@@ -1,5 +1,6 @@
 package eu.laramartin.stockhawk.widget;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,7 +8,9 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import java.util.Set;
@@ -42,6 +45,17 @@ public class WidgetIntentService extends IntentService {
                 WidgetProvider.class));
 
         Set<String> symbolSet = PrefUtils.getStocks(this);
+        if (symbolSet.size() == 0) {
+            for (int appWidgetId : appWidgetIds) {
+                RemoteViews views = new RemoteViews(
+                        getPackageName(),
+                        R.layout.widget_stock_item);
+                views.setViewVisibility(R.id.widget_single_stock_empty, View.VISIBLE);
+                views.setViewVisibility(R.id.widget, View.INVISIBLE);
+                appWidgetManager.updateAppWidget(appWidgetId, views);
+            }
+            return;
+        }
         String symbol = symbolSet.iterator().next();
         Uri stockUri = Contract.Quote.makeUriForStock(symbol);
         Cursor data = getContentResolver().query(stockUri, STOCK_COLUMNS, null,
@@ -69,28 +83,23 @@ public class WidgetIntentService extends IntentService {
             RemoteViews views = new RemoteViews(
                     getPackageName(),
                     R.layout.widget_stock_item);
+            views.setViewVisibility(R.id.widget_single_stock_empty, View.INVISIBLE);
+            views.setViewVisibility(R.id.widget, View.VISIBLE);
             views.setTextViewText(R.id.text_widget_stock_name, symbol);
             views.setTextViewText(R.id.text_widget_share_price, String.valueOf(price));
             views.setTextViewText(R.id.text_widget_price_change, String.valueOf(change));
-            views.setContentDescription(R.id.text_widget_stock_name,
-                    getString(R.string.content_description_stock, symbol));
-            views.setContentDescription(R.id.text_widget_share_price,
-                    getString(R.string.content_description_share_price, String.valueOf(price)));
-            if (PrefUtils.getDisplayMode(this).equals(
-                    this.getResources().getString(R.string.pref_display_mode_absolute_key))) {
-                views.setContentDescription(R.id.text_widget_price_change,
-                        getString(R.string.content_description_share_price_change_absolute,
-                                String.valueOf(change)));
-            } else {
-                views.setContentDescription(R.id.text_widget_price_change,
-                        getString(R.string.content_description_share_price_change_percentage,
-                                String.valueOf(change)));
-            }
             Intent launchIntent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0);
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
+            setRemoteContentDescription(views,
+                    getString(R.string.content_description_widget_item, symbol, price, change));
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
         data.close();
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+    private void setRemoteContentDescription(RemoteViews views, String description) {
+        views.setContentDescription(R.id.widget, description);
     }
 }

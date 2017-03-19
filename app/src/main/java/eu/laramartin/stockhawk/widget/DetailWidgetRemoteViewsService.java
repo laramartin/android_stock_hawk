@@ -1,9 +1,11 @@
 package eu.laramartin.stockhawk.widget;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
@@ -85,34 +87,28 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                         getApplicationContext().getResources().getString(R.string.pref_display_mode_absolute_key))) {
                     change = TextUtils.setDollarFormatWithPlus(getApplicationContext()).format(
                             cursor.getFloat(cursor.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
-                    views.setContentDescription(R.id.text_widget_price_change,
-                            getString(R.string.content_description_share_price_change_absolute, change));
                 } else {
                     float percentage = cursor.getFloat(
                             cursor.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
                     change = TextUtils.setPercentageFormat(getApplicationContext()).format(percentage / 100);
-                    views.setContentDescription(R.id.text_widget_price_change,
-                            getString(R.string.content_description_share_price_change_percentage, change));
                 }
                 views.setTextViewText(R.id.text_widget_stock_name, symbol);
                 views.setTextViewText(R.id.text_widget_share_price, price);
                 views.setTextViewText(R.id.text_widget_price_change, change);
-                views.setContentDescription(R.id.text_widget_stock_name,
-                        getString(R.string.content_description_stock, symbol));
-                views.setContentDescription(R.id.text_widget_share_price,
-                        getString(R.string.content_description_share_price, price));
                 final Intent fillInIntent = new Intent();
                 final Bundle extras = new Bundle();
                 extras.putString(getResources().getString(R.string.intent_stock_symbol_key), symbol);
                 fillInIntent.putExtras(extras);
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
+                setRemoteContentDescription(views,
+                        getString(R.string.content_description_widget_item, symbol, price, change));
                 return views;
             }
 
-//            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
-//            private void setRemoteContentDescription(RemoteViews views, String description) {
-//                views.setContentDescription(R.id.widget_icon, description);
-//            }
+            @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+            private void setRemoteContentDescription(RemoteViews views, String description) {
+                views.setContentDescription(R.id.widget, description);
+            }
 
             @Override
             public RemoteViews getLoadingView() {
