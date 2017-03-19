@@ -26,7 +26,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             private Cursor cursor = null;
 
             private final String[] STOCK_COLUMNS = {
-                    Contract.Quote.COLUMN_ID,
+                    Contract.Quote._ID,
                     Contract.Quote.COLUMN_SYMBOL,
                     Contract.Quote.COLUMN_PRICE,
                     Contract.Quote.COLUMN_ABSOLUTE_CHANGE,
@@ -122,7 +122,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
             @Override
             public long getItemId(int position) {
                 if (cursor.moveToPosition(position)) {
-                    return cursor.getLong(cursor.getColumnIndex(Contract.Quote.COLUMN_ID));
+                    return cursor.getLong(cursor.getColumnIndex(Contract.Quote._ID));
                 }
                 return position;
             }
