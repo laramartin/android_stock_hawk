@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (!NetworkUtils.networkUp(this) && adapter.getItemCount() == 0) {
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_network));
+            error.setContentDescription(getString(R.string.error_no_network));
             error.setVisibility(View.VISIBLE);
         } else if (!NetworkUtils.networkUp(this)) {
             swipeRefreshLayout.setRefreshing(false);
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else if (PrefUtils.getStocks(this).size() == 0) {
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_stocks));
+            error.setContentDescription(getString(R.string.error_no_stocks));
             error.setVisibility(View.VISIBLE);
         } else {
             error.setVisibility(View.GONE);
