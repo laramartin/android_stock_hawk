@@ -108,14 +108,20 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         setXAxisFormat();
         chart.setData(lineData);
         chart.invalidate();
+        chart.setContentDescription(getString(R.string.content_description_chart,
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL))));
     }
 
     private void displayStockStats(Cursor data) {
         data.moveToFirst();
         textStockName.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
+        textStockName.setContentDescription(getString(R.string.content_description_stock,
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_SYMBOL))));
         textStockPrice.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
+        textStockPrice.setContentDescription(getString(R.string.content_description_share_price,
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE))));
         String change;
         if (PrefUtils.getDisplayMode(this)
                 .equals(this.getString(R.string.pref_display_mode_absolute_key))) {
@@ -124,14 +130,14 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                     data.getFloat(
                             data.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
             textStockChange.setText(change);
-            textStockChange.setContentDescription(getString(R.string.share_price_change_absolute,
+            textStockChange.setContentDescription(getString(R.string.content_description_share_price_change_absolute,
                             change));
         } else {
             float percentage = data.getFloat(
                     data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
             change = TextUtils.setPercentageFormat(this).format(percentage / 100);
             textStockChange.setText(change);
-            textStockChange.setContentDescription(getString(R.string.share_price_change_percentage,
+            textStockChange.setContentDescription(getString(R.string.content_description_share_price_change_percentage,
                             change));
         }
         try {
@@ -139,16 +145,26 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                     data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
             volume /= 1000000;
             textStockVolume.setText(String.format("%.2fM", volume));
+            textStockVolume.setContentDescription(getString(R.string.content_description_stock_volume,
+                    volume));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         textStockLow.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
+        textStockLow.setContentDescription(getString(R.string.content_description_day_low,
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
         textStockHigh.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
+        textStockHigh.setContentDescription(getString(R.string.content_description_day_high,
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
         textStockOpen.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
+        textStockOpen.setContentDescription(getString(R.string.content_description_day_open,
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
         textStockPrevClose.setText(data.getString(
+                data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
+        textStockPrevClose.setContentDescription(getString(R.string.content_description_day_close,
                 data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
     }
 

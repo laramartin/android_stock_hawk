@@ -54,11 +54,11 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
         holder.symbol.setText(cursor.getString(
                 cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
-        holder.symbol.setContentDescription(context.getString(R.string.stock,
+        holder.symbol.setContentDescription(context.getString(R.string.content_description_stock,
                         cursor.getString(cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL))));
         holder.price.setText(TextUtils.setDollarFormat().format(
                 cursor.getFloat(cursor.getColumnIndex(Contract.Quote.COLUMN_PRICE))));
-        holder.price.setContentDescription(context.getString(R.string.share_price,
+        holder.price.setContentDescription(context.getString(R.string.content_description_share_price,
                 TextUtils.setDollarFormat().format(cursor.getFloat(
                         cursor.getColumnIndex(Contract.Quote.COLUMN_PRICE)))));
 
@@ -74,12 +74,12 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                 .equals(context.getString(R.string.pref_display_mode_absolute_key))) {
             holder.change.setText(change);
             holder.change.setContentDescription(
-                    context.getString(R.string.share_price_change_absolute,
+                    context.getString(R.string.content_description_share_price_change_absolute,
                     change));
         } else {
             holder.change.setText(percentage);
             holder.change.setContentDescription(
-                    context.getString(R.string.share_price_change_percentage,
+                    context.getString(R.string.content_description_share_price_change_percentage,
                     percentage));
         }
     }

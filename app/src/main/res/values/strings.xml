@@ -40,10 +40,10 @@
 
     <string name="display_mode_percentage">Display mode: Percentage.</string>
     <string name="display_mode_dollar">Display mode: Absolute.</string>
-    <string name="stock">Stock: %s</string>
-    <string name="share_price">Share price: %s.</string>
-    <string name="share_price_change_absolute">Share price change: %s.</string>
-    <string name="share_price_change_percentage">Share price change: %s.</string>
+    <string name="content_description_stock">Stock: %s</string>
+    <string name="content_description_share_price">Share price: %s.</string>
+    <string name="content_description_share_price_change_absolute">Share price change: %s.</string>
+    <string name="content_description_share_price_change_percentage">Share price change: %s.</string>
     <string name="button_add_stock">Add Stock</string>
     <string name="intent_stock_symbol_key">StockSymbol</string>
     <string name="symbol_line_break">\n</string>
@@ -60,5 +60,11 @@
     <string name="title_widget">Stock Hawk</string>
     <string name="empty_stock_list">Add stocks to the list in the app!</string>
     <string name="title_widget_detail">Stock Details</string>
+    <string name="content_description_stock_volume">Volume: %f.</string>
+    <string name="content_description_day_low">Day low: %s.</string>
+    <string name="content_description_day_high">Day high: $s.</string>
+    <string name="content_description_day_open">Day open: %s.</string>
+    <string name="content_description_day_close">Day close: %s.</string>
+    <string name="content_description_chart">Chart displaying weekly closing prices in the last two years of %s.</string>
 
 </resources>
