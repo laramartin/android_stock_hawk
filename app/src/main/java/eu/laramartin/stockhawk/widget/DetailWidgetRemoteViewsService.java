@@ -85,14 +85,22 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                         getApplicationContext().getResources().getString(R.string.pref_display_mode_absolute_key))) {
                     change = TextUtils.setDollarFormatWithPlus(getApplicationContext()).format(
                             cursor.getFloat(cursor.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
+                    views.setContentDescription(R.id.text_widget_price_change,
+                            getString(R.string.content_description_share_price_change_absolute, change));
                 } else {
                     float percentage = cursor.getFloat(
                             cursor.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
                     change = TextUtils.setPercentageFormat(getApplicationContext()).format(percentage / 100);
+                    views.setContentDescription(R.id.text_widget_price_change,
+                            getString(R.string.content_description_share_price_change_percentage, change));
                 }
                 views.setTextViewText(R.id.text_widget_stock_name, symbol);
                 views.setTextViewText(R.id.text_widget_share_price, price);
                 views.setTextViewText(R.id.text_widget_price_change, change);
+                views.setContentDescription(R.id.text_widget_stock_name,
+                        getString(R.string.content_description_stock, symbol));
+                views.setContentDescription(R.id.text_widget_share_price,
+                        getString(R.string.content_description_share_price, price));
                 final Intent fillInIntent = new Intent();
                 final Bundle extras = new Bundle();
                 extras.putString(getResources().getString(R.string.intent_stock_symbol_key), symbol);
