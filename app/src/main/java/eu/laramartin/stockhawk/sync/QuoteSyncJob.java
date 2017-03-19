@@ -76,7 +76,7 @@ public final class QuoteSyncJob {
 
 
                 Stock stock = quotes.get(symbol);
-                if (stock.getName() == null) {
+                if (stock == null || stock.getName() == null) {
                     PrefUtils.removeStock(context, symbol);
                     Toast.makeText(context, "stock wasn't found", Toast.LENGTH_SHORT).show();
                     continue;
