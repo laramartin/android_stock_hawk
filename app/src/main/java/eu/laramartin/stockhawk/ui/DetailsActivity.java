@@ -67,6 +67,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     TextView textStockOpenLabel;
     @BindView(R.id.text_details_prev_close_label)
     TextView textStockPrevCloseLabel;
+    @BindView(R.id.error_details)
+    TextView error;
 
 
     @Override
