@@ -43,11 +43,31 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     TextView textStockPrice;
     @BindView(R.id.text_details_change)
     TextView textStockChange;
-    @BindView(R.id.text_details_volume) TextView textStockVolume;
-    @BindView(R.id.text_details_low) TextView textStockLow;
-    @BindView(R.id.text_details_high) TextView textStockHigh;
-    @BindView(R.id.text_details_open) TextView textStockOpen;
-    @BindView(R.id.text_details_prev_close) TextView textStockPrevClose;
+    @BindView(R.id.text_details_volume)
+    TextView textStockVolume;
+    @BindView(R.id.text_details_low)
+    TextView textStockLow;
+    @BindView(R.id.text_details_high)
+    TextView textStockHigh;
+    @BindView(R.id.text_details_open)
+    TextView textStockOpen;
+    @BindView(R.id.text_details_prev_close)
+    TextView textStockPrevClose;
+    @BindView(R.id.text_details_price_label)
+    TextView textStockPriceLabel;
+    @BindView(R.id.text_details_change_label)
+    TextView textStockChangeLabel;
+    @BindView(R.id.text_details_volume_label)
+    TextView textStockVolumeLabel;
+    @BindView(R.id.text_details_low_label)
+    TextView textStockLowLabel;
+    @BindView(R.id.text_details_high_label)
+    TextView textStockHighLabel;
+    @BindView(R.id.text_details_open_label)
+    TextView textStockOpenLabel;
+    @BindView(R.id.text_details_prev_close_label)
+    TextView textStockPrevCloseLabel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +142,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                 data.getColumnIndex(Contract.Quote.COLUMN_PRICE)));
         textStockPrice.setContentDescription(getString(R.string.content_description_share_price,
                 data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE))));
+        textStockPriceLabel.setContentDescription(getString(R.string.content_description_share_price,
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PRICE))));
         String change;
         if (PrefUtils.getDisplayMode(this)
                 .equals(this.getString(R.string.pref_display_mode_absolute_key))) {
@@ -131,14 +153,18 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                             data.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
             textStockChange.setText(change);
             textStockChange.setContentDescription(getString(R.string.content_description_share_price_change_absolute,
-                            change));
+                    change));
+            textStockChangeLabel.setContentDescription(getString(R.string.content_description_share_price_change_absolute,
+                    change));
         } else {
             float percentage = data.getFloat(
                     data.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
             change = TextUtils.setPercentageFormat(this).format(percentage / 100);
             textStockChange.setText(change);
             textStockChange.setContentDescription(getString(R.string.content_description_share_price_change_percentage,
-                            change));
+                    change));
+            textStockChangeLabel.setContentDescription(getString(R.string.content_description_share_price_change_percentage,
+                    change));
         }
         try {
             float volume = Float.parseFloat(data.getString(
@@ -147,6 +173,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             textStockVolume.setText(String.format("%.2fM", volume));
             textStockVolume.setContentDescription(getString(R.string.content_description_stock_volume,
                     volume));
+            textStockVolumeLabel.setContentDescription(
+                    getString(R.string.content_description_stock_volume, volume));
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -154,17 +182,25 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
         textStockLow.setContentDescription(getString(R.string.content_description_day_low,
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
+        textStockLowLabel.setContentDescription(getString(R.string.content_description_day_low,
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
         textStockHigh.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
         textStockHigh.setContentDescription(getString(R.string.content_description_day_high,
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
+        textStockHighLabel.setContentDescription(getString(R.string.content_description_day_high,
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
         textStockOpen.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
         textStockOpen.setContentDescription(getString(R.string.content_description_day_open,
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
+        textStockOpenLabel.setContentDescription(getString(R.string.content_description_day_open,
+                data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
         textStockPrevClose.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
         textStockPrevClose.setContentDescription(getString(R.string.content_description_day_close,
+                data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
+        textStockPrevCloseLabel.setContentDescription(getString(R.string.content_description_day_close,
                 data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
     }
 

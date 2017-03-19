@@ -12,9 +12,9 @@
 
         <TextView
             android:id="@+id/text_details_stock_name"
+            style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Headline"
             tools:text="GOOG" />
 
         <LinearLayout
@@ -37,9 +37,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_price_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/share_price_title" />
+                        android:text="@string/text_details_price_label" />
 
                     <TextView
                         android:id="@+id/text_details_price"
@@ -57,9 +58,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_change_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/change_share_price" />
+                        android:text="@string/text_details_change_label" />
 
                     <TextView
                         android:id="@+id/text_details_change"
@@ -77,9 +79,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_prev_close_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/stock_prev_close" />
+                        android:text="@string/text_details_prev_close_label" />
 
                     <TextView
                         android:id="@+id/text_details_prev_close"
@@ -97,9 +100,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_volume_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/stock_volume" />
+                        android:text="@string/text_details_volume_label" />
 
                     <TextView
                         android:id="@+id/text_details_volume"
@@ -125,9 +129,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_low_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/stock_day_low" />
+                        android:text="@string/text_details_low_label" />
 
                     <TextView
                         android:id="@+id/text_details_low"
@@ -145,9 +150,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_high_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/stock_day_high" />
+                        android:text="@string/text_details_high_label" />
 
                     <TextView
                         android:id="@+id/text_details_high"
@@ -165,9 +171,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/text_details_open_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/stock_day_open" />
+                        android:text="@string/text_details_open_label" />
 
                     <TextView
                         android:id="@+id/text_details_open"
@@ -185,7 +192,7 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="32dp"/>
+            android:layout_marginTop="32dp" />
 
     </LinearLayout>
 </ScrollView>
