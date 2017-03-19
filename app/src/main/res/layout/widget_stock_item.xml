@@ -8,9 +8,8 @@
     <LinearLayout
         android:id="@+id/widget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlackTransparency"
         android:orientation="horizontal"
         android:padding="8dp"
         android:weightSum="3">

@@ -21,8 +21,10 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="widgetLargeText" parent="TextAppearance.AppCompat.Headline">
+    <style name="widgetLargeText">
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorSoftWhite</item>
     </style>
 </resources>
