@@ -59,6 +59,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             symbol = intent.getExtras().getString(getString(R.string.intent_stock_symbol_key));
         }
         getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
+        chart.getXAxis().setTextColor(getResources().getColor(R.color.colorSoftWhite));
+        chart.getAxisLeft().setTextColor(getResources().getColor(R.color.colorSoftWhite));
+        chart.getAxisRight().setTextColor(getResources().getColor(R.color.colorSoftWhite));
+        chart.getLegend().setEnabled(false);
+        chart.getDescription().setEnabled(false);
     }
 
     @Override
