@@ -53,18 +53,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         adapter = new StockAdapter(this, this);
         stockRecyclerView.setAdapter(adapter);
         stockRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setRefreshing(true);
         onRefresh();
-
         QuoteSyncJob.initialize(this);
         getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
 
@@ -81,22 +77,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
             }
         }).attachToRecyclerView(stockRecyclerView);
-
-
     }
-
-//    private boolean networkUp() {
-//        ConnectivityManager cm =
-//                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-//        return networkInfo != null && networkInfo.isConnectedOrConnecting();
-//    }
 
     @Override
     public void onRefresh() {
-
         QuoteSyncJob.syncImmediately(this);
-
         if (!NetworkUtils.networkUp(this) && adapter.getItemCount() == 0) {
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_network));
@@ -121,14 +106,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     void addStock(String symbol) {
         if (symbol != null && !symbol.isEmpty()) {
-
             if (NetworkUtils.networkUp(this)) {
                 swipeRefreshLayout.setRefreshing(true);
             } else {
                 String message = getString(R.string.toast_stock_added_no_connectivity, symbol);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
-
             PrefUtils.addStock(this, symbol);
             QuoteSyncJob.syncImmediately(this);
         }
@@ -145,20 +128,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         swipeRefreshLayout.setRefreshing(false);
-
         if (data.getCount() != 0) {
             error.setVisibility(View.GONE);
         }
         adapter.setCursor(data);
     }
 
-
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         swipeRefreshLayout.setRefreshing(false);
         adapter.setCursor(null);
     }
-
 
     private void setDisplayModeMenuItemIcon(MenuItem item) {
         if (PrefUtils.getDisplayMode(this)

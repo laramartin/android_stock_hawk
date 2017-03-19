@@ -122,8 +122,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                     Float.parseFloat(dataPair.get(1))));
         }
         LineDataSet dataSet = new LineDataSet(chartEntries, null);
-        // TODO check why setColor doesn't work
-        dataSet.setColor(R.color.colorAccent);
         LineData lineData = new LineData(dataSet);
         setXAxisFormat();
         chart.setData(lineData);
@@ -147,7 +145,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         String change;
         if (PrefUtils.getDisplayMode(this)
                 .equals(this.getString(R.string.pref_display_mode_absolute_key))) {
-
             change = TextUtils.setDollarFormatWithPlus(this).format(
                     data.getFloat(
                             data.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE)));
@@ -224,6 +221,5 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        //TODO
     }
 }

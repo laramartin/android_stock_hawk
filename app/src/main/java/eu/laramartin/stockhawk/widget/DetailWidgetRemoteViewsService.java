@@ -25,9 +25,7 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new RemoteViewsFactory() {
-
             private Cursor cursor = null;
-
             private final String[] STOCK_COLUMNS = {
                     Contract.Quote._ID,
                     Contract.Quote.COLUMN_SYMBOL,
@@ -47,8 +45,6 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                     cursor.close();
                 }
                 final long identityToken = Binder.clearCallingIdentity();
-//                Set<String> symbolSet = PrefUtils.getStocks(getApplicationContext());
-//                String symbol = symbolSet.iterator().next();
                 Uri stockUri = Contract.Quote.URI;
                 cursor = getContentResolver().query(stockUri, STOCK_COLUMNS, null,
                         null, Contract.Quote.COLUMN_SYMBOL + " ASC");

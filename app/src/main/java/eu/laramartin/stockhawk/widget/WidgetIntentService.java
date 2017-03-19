@@ -43,7 +43,6 @@ public class WidgetIntentService extends IntentService {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this,
                 WidgetProvider.class));
-
         Set<String> symbolSet = PrefUtils.getStocks(this);
         if (symbolSet.size() == 0) {
             for (int appWidgetId : appWidgetIds) {

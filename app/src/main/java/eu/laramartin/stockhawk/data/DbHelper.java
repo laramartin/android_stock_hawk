@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-
-
 class DbHelper extends SQLiteOpenHelper {
 
     private static final String NAME = "StockHawk.db";

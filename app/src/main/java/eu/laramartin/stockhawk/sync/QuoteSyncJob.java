@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -30,8 +29,6 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
-import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
-
 public final class QuoteSyncJob {
 
     private static final int ONE_OFF_ID = 2;
@@ -45,15 +42,12 @@ public final class QuoteSyncJob {
     }
 
     static void getQuotes(Context context) {
-
         Timber.d("Running sync job");
-
         Calendar from = Calendar.getInstance();
         Calendar to = Calendar.getInstance();
         from.add(Calendar.YEAR, -YEARS_OF_HISTORY);
 
         try {
-
             Set<String> stockPref = PrefUtils.getStocks(context);
             Set<String> stockCopy = new HashSet<>();
             stockCopy.addAll(stockPref);
@@ -68,13 +62,10 @@ public final class QuoteSyncJob {
             Iterator<String> iterator = stockCopy.iterator();
 
             Timber.d(quotes.toString());
-
             ArrayList<ContentValues> quoteCVs = new ArrayList<>();
 
             while (iterator.hasNext()) {
                 String symbol = iterator.next();
-
-
                 Stock stock = quotes.get(symbol);
                 if (stock == null || stock.getName() == null) {
                     PrefUtils.removeStock(context, symbol);
@@ -82,7 +73,6 @@ public final class QuoteSyncJob {
                     continue;
                 }
                 StockQuote quote = stock.getQuote();
-
                 float price = quote.getPrice().floatValue();
                 float change = quote.getChange().floatValue();
                 float percentChange = quote.getChangeInPercent().floatValue();
@@ -92,28 +82,16 @@ public final class QuoteSyncJob {
                 BigDecimal dayOpen = quote.getOpen();
                 BigDecimal previousClose = quote.getPreviousClose();
 
-                Log.v(LOG_TAG, "price: " + price);
-                Log.v(LOG_TAG, "change: " + change);
-                Log.v(LOG_TAG, "percentChange: " + percentChange);
-                Log.v(LOG_TAG, "volume: " + volume);
-                Log.v(LOG_TAG, "dayLow: " + dayLow);
-                Log.v(LOG_TAG, "dayHigh: " + dayHigh);
-                Log.v(LOG_TAG, "dayOpen: " + dayOpen);
-                Log.v(LOG_TAG, "previousClose: " + previousClose);
-
                 // WARNING! Don't request historical data for a stock that doesn't exist!
                 // The request will hang forever X_x
                 List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
-
                 StringBuilder historyBuilder = new StringBuilder();
-
                 for (HistoricalQuote it : history) {
                     historyBuilder.append(it.getDate().getTimeInMillis());
                     historyBuilder.append(", ");
                     historyBuilder.append(it.getClose());
                     historyBuilder.append("\n");
                 }
-
                 ContentValues quoteCV = new ContentValues();
                 quoteCV.put(Contract.Quote.COLUMN_SYMBOL, symbol);
                 quoteCV.put(Contract.Quote.COLUMN_PRICE, price);
@@ -127,15 +105,12 @@ public final class QuoteSyncJob {
                 quoteCV.put(Contract.Quote.COLUMN_PREV_CLOSE, String.valueOf(previousClose));
                 quoteCVs.add(quoteCV);
             }
-
             context.getContentResolver()
                     .bulkInsert(
                             Contract.Quote.URI,
                             quoteCVs.toArray(new ContentValues[quoteCVs.size()]));
-
             Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
             context.sendBroadcast(dataUpdatedIntent);
-
         } catch (IOException exception) {
             Timber.e(exception, "Error fetching stock quotes");
         }
@@ -143,21 +118,13 @@ public final class QuoteSyncJob {
 
     private static void schedulePeriodic(Context context) {
         Timber.d("Scheduling a periodic task");
-
-
         JobInfo.Builder builder = new JobInfo.Builder(PERIODIC_ID, new ComponentName(context, QuoteJobService.class));
-
-
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .setPeriodic(PERIOD)
                 .setBackoffCriteria(INITIAL_BACKOFF, JobInfo.BACKOFF_POLICY_EXPONENTIAL);
-
-
         JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-
         scheduler.schedule(builder.build());
     }
-
 
     public static synchronized void initialize(final Context context) {
         schedulePeriodic(context);
@@ -165,7 +132,6 @@ public final class QuoteSyncJob {
     }
 
     public static synchronized void syncImmediately(Context context) {
-
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -173,16 +139,10 @@ public final class QuoteSyncJob {
             Intent nowIntent = new Intent(context, QuoteIntentService.class);
             context.startService(nowIntent);
         } else {
-
             JobInfo.Builder builder = new JobInfo.Builder(ONE_OFF_ID, new ComponentName(context, QuoteJobService.class));
-
-
             builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                     .setBackoffCriteria(INITIAL_BACKOFF, JobInfo.BACKOFF_POLICY_EXPONENTIAL);
-
-
             JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-
             scheduler.schedule(builder.build());
         }
     }

@@ -15,9 +15,7 @@ public class StockProvider extends ContentProvider {
 
     private static final int QUOTE = 100;
     private static final int QUOTE_FOR_SYMBOL = 101;
-
     private static final UriMatcher uriMatcher = buildUriMatcher();
-
     private DbHelper dbHelper;
 
     private static UriMatcher buildUriMatcher() {
@@ -26,7 +24,6 @@ public class StockProvider extends ContentProvider {
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE_WITH_SYMBOL, QUOTE_FOR_SYMBOL);
         return matcher;
     }
-
 
     @Override
     public boolean onCreate() {
@@ -39,7 +36,6 @@ public class StockProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         Cursor returnCursor;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
         switch (uriMatcher.match(uri)) {
             case QUOTE:
                 returnCursor = db.query(
@@ -52,7 +48,6 @@ public class StockProvider extends ContentProvider {
                         sortOrder
                 );
                 break;
-
             case QUOTE_FOR_SYMBOL:
                 returnCursor = db.query(
                         Contract.Quote.TABLE_NAME,
@@ -63,17 +58,14 @@ public class StockProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown URI:" + uri);
         }
-
         Context context = getContext();
-        if (context != null){
+        if (context != null) {
             returnCursor.setNotificationUri(context.getContentResolver(), uri);
         }
-
         return returnCursor;
     }
 
@@ -88,7 +80,6 @@ public class StockProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Uri returnUri;
-
         switch (uriMatcher.match(uri)) {
             case QUOTE:
                 db.insert(
@@ -101,12 +92,10 @@ public class StockProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown URI:" + uri);
         }
-
         Context context = getContext();
-        if (context != null){
+        if (context != null) {
             context.getContentResolver().notifyChange(uri, null);
         }
-
         return returnUri;
     }
 
@@ -114,7 +103,6 @@ public class StockProvider extends ContentProvider {
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
         int rowsDeleted;
-
         if (null == selection) {
             selection = "1";
         }
@@ -125,9 +113,7 @@ public class StockProvider extends ContentProvider {
                         selection,
                         selectionArgs
                 );
-
                 break;
-
             case QUOTE_FOR_SYMBOL:
                 String symbol = Contract.Quote.getStockFromUri(uri);
                 rowsDeleted = db.delete(
@@ -139,10 +125,9 @@ public class StockProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown URI:" + uri);
         }
-
         if (rowsDeleted != 0) {
             Context context = getContext();
-            if (context != null){
+            if (context != null) {
                 context.getContentResolver().notifyChange(uri, null);
             }
         }
@@ -156,9 +141,7 @@ public class StockProvider extends ContentProvider {
 
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
-
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
-
         switch (uriMatcher.match(uri)) {
             case QUOTE:
                 db.beginTransaction();
@@ -175,12 +158,10 @@ public class StockProvider extends ContentProvider {
                 } finally {
                     db.endTransaction();
                 }
-
                 Context context = getContext();
                 if (context != null) {
                     context.getContentResolver().notifyChange(uri, null);
                 }
-
                 return returnCount;
             default:
                 return super.bulkInsert(uri, values);

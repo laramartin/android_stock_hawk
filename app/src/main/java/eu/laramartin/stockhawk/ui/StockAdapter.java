@@ -33,7 +33,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
     }
 
     String getSymbolAtPosition(int position) {
-
         cursor.moveToPosition(position);
         return cursor.getString(
                 cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL));
@@ -41,27 +40,22 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public StockViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View item = LayoutInflater.from(context).inflate(R.layout.list_item_quote, parent, false);
-
         return new StockViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(StockViewHolder holder, int position) {
-
         cursor.moveToPosition(position);
-
         holder.symbol.setText(cursor.getString(
                 cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL)));
         holder.symbol.setContentDescription(context.getString(R.string.content_description_stock,
-                        cursor.getString(cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL))));
+                cursor.getString(cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL))));
         holder.price.setText(TextUtils.setDollarFormat().format(
                 cursor.getFloat(cursor.getColumnIndex(Contract.Quote.COLUMN_PRICE))));
         holder.price.setContentDescription(context.getString(R.string.content_description_share_price,
                 TextUtils.setDollarFormat().format(cursor.getFloat(
                         cursor.getColumnIndex(Contract.Quote.COLUMN_PRICE)))));
-
         float rawAbsoluteChange = cursor.getFloat(
                 cursor.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE));
         float percentageChange = cursor.getFloat(
@@ -69,18 +63,17 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         holder.change.setBackgroundResource(TextUtils.getBackgroundColorForStockChange(rawAbsoluteChange));
         String change = TextUtils.setDollarFormatWithPlus(context).format(rawAbsoluteChange);
         String percentage = TextUtils.setPercentageFormat(context).format(percentageChange / 100);
-
         if (PrefUtils.getDisplayMode(context)
                 .equals(context.getString(R.string.pref_display_mode_absolute_key))) {
             holder.change.setText(change);
             holder.change.setContentDescription(
                     context.getString(R.string.content_description_share_price_change_absolute,
-                    change));
+                            change));
         } else {
             holder.change.setText(percentage);
             holder.change.setContentDescription(
                     context.getString(R.string.content_description_share_price_change_percentage,
-                    percentage));
+                            percentage));
         }
     }
 
@@ -93,7 +86,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         return count;
     }
 
-
     interface StockAdapterOnClickHandler {
         void onClick(String symbol);
     }
@@ -102,10 +94,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
         @BindView(R.id.symbol)
         TextView symbol;
-
         @BindView(R.id.price)
         TextView price;
-
         @BindView(R.id.change)
         TextView change;
 
