@@ -120,7 +120,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             chartEntries.add(new Entry(Float.parseFloat(dataPair.get(0)),
                     Float.parseFloat(dataPair.get(1))));
         }
-        LineDataSet dataSet = new LineDataSet(chartEntries, getString(R.string.chart_label));
+        LineDataSet dataSet = new LineDataSet(chartEntries, null);
         // TODO check why setColor doesn't work
         dataSet.setColor(R.color.colorAccent);
         LineData lineData = new LineData(dataSet);

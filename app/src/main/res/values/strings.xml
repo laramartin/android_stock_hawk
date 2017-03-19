@@ -8,13 +8,22 @@
     <string name="pref_display_mode_absolute_key" translatable="false">absolute</string>
     <string name="pref_display_mode_percentage_key" translatable="false">percentage</string>
 
-
     <string name="default_stocks_yahoo" translatable="false">YHOO</string>
     <string name="default_stocks_apple" translatable="false">AAPL</string>
     <string name="default_stocks_microsoft" translatable="false">MSFT</string>
     <string name="default_stocks_facebook" translatable="false">FB</string>
 
     <string name="action_change_units" translatable="false">@string/pref_display_mode_key</string>
+
+    <string name="percentage_prefix_positive" translatable="false">+</string>
+    <string name="dollar_prefix_positive" translatable="false">+$</string>
+    <string name="intent_stock_symbol_key" translatable="false">StockSymbol</string>
+    <string name="symbol_line_break" translatable="false">\n</string>
+    <string name="symbol_separator_pairs_data_history_data" translatable="false">, </string>
+    <string name="date_american_format" translatable="false">MM/dd/yyyy</string>
+
+    <string name="title_widget" translatable="false">Stock Hawk</string>
+    <string name="title_widget_detail" translatable="false">Stock Details</string>
 
     <!--Dialog shown when adding a new stock.-->
     <string name="dialog_title">Add Stock</string>
@@ -35,21 +44,7 @@
     <!--Text to display on Toasts to notify the user that content will be refreshed when there is network connection.-->
     <string name="toast_no_connectivity">Will refresh when network available.</string>
 
-    <string name="percentage_prefix_positive" translatable="false">+</string>
-    <string name="dollar_prefix_positive" translatable="false">+$</string>
-
-    <string name="display_mode_percentage">Display mode: Percentage.</string>
-    <string name="display_mode_dollar">Display mode: Absolute.</string>
-    <string name="content_description_stock">Stock: %s</string>
-    <string name="content_description_share_price">Share price: %s.</string>
-    <string name="content_description_share_price_change_absolute">Share price change: %s.</string>
-    <string name="content_description_share_price_change_percentage">Share price change: %s.</string>
-    <string name="button_add_stock">Add Stock</string>
-    <string name="intent_stock_symbol_key">StockSymbol</string>
-    <string name="symbol_line_break">\n</string>
-    <string name="symbol_separator_pairs_data_history_data">, </string>
-    <string name="chart_label">Label</string>
-    <string name="date_american_format">MM/dd/yyyy</string>
+    <!--Text to display in a stock details next to its value-->
     <string name="text_details_price_label">Share price</string>
     <string name="text_details_change_label">Change</string>
     <string name="text_details_prev_close_label">Prev. close</string>
@@ -57,9 +52,18 @@
     <string name="text_details_high_label">High</string>
     <string name="text_details_open_label">Close</string>
     <string name="text_details_volume_label">Volume</string>
-    <string name="title_widget">Stock Hawk</string>
+
+    <!--Text to display when there aren't stocks in the list, so the user has to add some.-->
     <string name="empty_stock_list">Add stocks to the list in the app!</string>
-    <string name="title_widget_detail">Stock Details</string>
+
+    <!--Text to be used in TalkBack for accessibility-->
+    <string name="display_mode_percentage">Display mode: Percentage.</string>
+    <string name="display_mode_dollar">Display mode: Absolute.</string>
+    <string name="button_add_stock">Add Stock</string>
+    <string name="content_description_stock">Stock: %s</string>
+    <string name="content_description_share_price">Share price: %s.</string>
+    <string name="content_description_share_price_change_absolute">Share price change: %s.</string>
+    <string name="content_description_share_price_change_percentage">Share price change: %s.</string>
     <string name="content_description_stock_volume">Volume: %f.</string>
     <string name="content_description_day_low">Day low: %s.</string>
     <string name="content_description_day_high">Day high: $s.</string>
