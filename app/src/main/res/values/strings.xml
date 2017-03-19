@@ -13,8 +13,6 @@
     <string name="default_stocks_microsoft" translatable="false">MSFT</string>
     <string name="default_stocks_facebook" translatable="false">FB</string>
 
-    <string name="action_change_units" translatable="false">@string/pref_display_mode_key</string>
-
     <string name="percentage_prefix_positive" translatable="false">+</string>
     <string name="dollar_prefix_positive" translatable="false">+$</string>
     <string name="intent_stock_symbol_key" translatable="false">StockSymbol</string>
@@ -66,10 +64,10 @@
     <string name="content_description_share_price_change_percentage">Share price change: %s.</string>
     <string name="content_description_stock_volume">Volume: %f.</string>
     <string name="content_description_day_low">Day low: %s.</string>
-    <string name="content_description_day_high">Day high: $s.</string>
+    <string name="content_description_day_high">Day high: %s.</string>
     <string name="content_description_day_open">Day open: %s.</string>
     <string name="content_description_day_close">Day close: %s.</string>
     <string name="content_description_chart">Chart displaying weekly closing prices in the last two years of %s.</string>
-    <string name="content_description_widget_item" formatted="false">The stock selected is %1s. The stock price is %2s and the price change is %3s.</string>
+    <string name="content_description_widget_item">The stock selected is %1$s. The stock price is %2$s and the price change is %3$s.</string>
 
 </resources>

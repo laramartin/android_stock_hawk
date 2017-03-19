@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -169,7 +170,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             float volume = Float.parseFloat(data.getString(
                     data.getColumnIndex(Contract.Quote.COLUMN_VOLUME)));
             volume /= 1000000;
-            textStockVolume.setText(String.format("%.2fM", volume));
+            textStockVolume.setText(String.format(Locale.US, "%.2fM", volume));
             textStockVolume.setContentDescription(getString(R.string.content_description_stock_volume,
                     volume));
             textStockVolumeLabel.setContentDescription(
@@ -180,27 +181,27 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         textStockLow.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
         textStockLow.setContentDescription(getString(R.string.content_description_day_low,
-                data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW))));
         textStockLowLabel.setContentDescription(getString(R.string.content_description_day_low,
-                data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_LOW))));
         textStockHigh.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
         textStockHigh.setContentDescription(getString(R.string.content_description_day_high,
-                data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH))));
         textStockHighLabel.setContentDescription(getString(R.string.content_description_day_high,
-                data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_HIGH))));
         textStockOpen.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
         textStockOpen.setContentDescription(getString(R.string.content_description_day_open,
-                data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN))));
         textStockOpenLabel.setContentDescription(getString(R.string.content_description_day_open,
-                data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_DAY_OPEN))));
         textStockPrevClose.setText(data.getString(
                 data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
         textStockPrevClose.setContentDescription(getString(R.string.content_description_day_close,
-                data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE))));
         textStockPrevCloseLabel.setContentDescription(getString(R.string.content_description_day_close,
-                data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE)));
+                data.getString(data.getColumnIndex(Contract.Quote.COLUMN_PREV_CLOSE))));
     }
 
     private void setXAxisFormat() {
@@ -216,7 +217,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     private String convertTimeInMillisToDate(float dateInMillis) {
         Date date = new Date((long) (dateInMillis));
-        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.date_american_format));
+        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.date_american_format),
+                Locale.US);
         return formatter.format(date);
     }
 
