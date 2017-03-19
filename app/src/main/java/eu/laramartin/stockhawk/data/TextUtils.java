@@ -34,4 +34,12 @@ public final class TextUtils {
         percentageFormat.setPositivePrefix(context.getString(R.string.percentage_prefix_positive));
         return percentageFormat;
     }
+
+    public static int getBackgroundColorForStockChange(float change) {
+        if (change > 0) {
+            return R.drawable.percent_change_pill_green;
+        } else {
+            return R.drawable.percent_change_pill_red;
+        }
+    }
 }

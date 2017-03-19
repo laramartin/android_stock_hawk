@@ -66,13 +66,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                 cursor.getColumnIndex(Contract.Quote.COLUMN_ABSOLUTE_CHANGE));
         float percentageChange = cursor.getFloat(
                 cursor.getColumnIndex(Contract.Quote.COLUMN_PERCENTAGE_CHANGE));
-
-        if (rawAbsoluteChange > 0) {
-            holder.change.setBackgroundResource(R.drawable.percent_change_pill_green);
-        } else {
-            holder.change.setBackgroundResource(R.drawable.percent_change_pill_red);
-        }
-
+        holder.change.setBackgroundResource(TextUtils.getBackgroundColorForStockChange(rawAbsoluteChange));
         String change = TextUtils.setDollarFormatWithPlus(context).format(rawAbsoluteChange);
         String percentage = TextUtils.setPercentageFormat(context).format(percentageChange / 100);
 
