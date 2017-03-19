@@ -1,11 +1,10 @@
-# Stock Hawk
+# Android Stock Hawk
 
-This is the starter code for project 3 in Udacity's [Android Developer Nanodegree](https://www.udacity.com/course/android-developer-nanodegree-by-google--nd801). 
+Developed from the starter code for project 3 in Udacity's [Android Developer Nanodegree](https://www.udacity.com/course/android-developer-nanodegree-by-google--nd801). 
 
-Check out Udacity's [Advanced Android App Development](https://www.udacity.com/course/advanced-android-app-development--ud855) course to get the skills you'll need to complete this project!
+Stay up-to-date with the latest information about your favorite stocks! You can add stocks, view details of price change over time and follow the price change from your home screen with a widget. 
 
-If you're a Nanodegree student check your work against the project [rubric](https://review.udacity.com/#!/rubrics/140/view), then click [here](https://classroom.udacity.com/nanodegrees/nd801/parts/8011345406/project) to submit your project.
+<img src="https://raw.githubusercontent.com/laramartin/android_stock_hawk/master/art/device-2017-03-19-221653.png" width="250"/>
+<img src="https://raw.githubusercontent.com/laramartin/android_stock_hawk/master/art/device-2017-03-19-221811.png" width="250"/>
 
-# Contributing
-
-Pull requests gratefully accepted.
+<img src="https://raw.githubusercontent.com/laramartin/android_stock_hawk/master/art/device-2017-03-19-221911.png" width="250"/>
