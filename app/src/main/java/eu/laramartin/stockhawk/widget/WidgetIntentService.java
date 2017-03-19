@@ -74,6 +74,8 @@ public class WidgetIntentService extends IntentService {
             views.setTextViewText(R.id.text_widget_price_change, String.valueOf(change));
             views.setContentDescription(R.id.text_widget_stock_name,
                     getString(R.string.content_description_stock, symbol));
+            views.setContentDescription(R.id.text_widget_share_price,
+                    getString(R.string.content_description_share_price, String.valueOf(price)));
             if (PrefUtils.getDisplayMode(this).equals(
                     this.getResources().getString(R.string.pref_display_mode_absolute_key))) {
                 views.setContentDescription(R.id.text_widget_price_change,
@@ -84,7 +86,6 @@ public class WidgetIntentService extends IntentService {
                         getString(R.string.content_description_share_price_change_percentage,
                                 String.valueOf(change)));
             }
-
             Intent launchIntent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, 0);
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
