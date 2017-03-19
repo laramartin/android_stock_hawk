@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -62,11 +63,10 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public int getCount() {
-//                if (cursor == null) {
-//                    return 0;
-//                }
-//                return cursor.getCount();
-                return cursor == null ? 0 : cursor.getCount();
+                if (cursor == null) {
+                    return 0;
+                }
+                return cursor.getCount();
             }
 
             @Override
@@ -93,14 +93,11 @@ public class DetailWidgetRemoteViewsService extends RemoteViewsService {
                 views.setTextViewText(R.id.text_widget_stock_name, symbol);
                 views.setTextViewText(R.id.text_widget_share_price, price);
                 views.setTextViewText(R.id.text_widget_price_change, change);
-//                final Intent fillInIntent = new Intent();
-//                String locationSetting =
-//                        Utility.getPreferredLocation(DetailWidgetRemoteViewsService.this);
-//                Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(
-//                        locationSetting,
-//                        dateInMillis);
-//                fillInIntent.setData(weatherUri);
-//                views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
+                final Intent fillInIntent = new Intent();
+                final Bundle extras = new Bundle();
+                extras.putString(getResources().getString(R.string.intent_stock_symbol_key), symbol);
+                fillInIntent.putExtras(extras);
+                views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
                 return views;
             }
 
